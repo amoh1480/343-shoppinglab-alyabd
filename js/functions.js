@@ -24,8 +24,31 @@ function outputCartRow(item, total) {
 }
 
 function outputTableBody() {
+  let subtotal = 0;
   for (let item of cart) {
     let total = calculateTotal(item.quantity, item.product.price);
+    subtotal += total;
     outputCartRow(item, total);
   }
+
+
+
+  
+  const bottom = `        <tr class="totals">
+  <td colspan="4">Subtotal</td>
+  <td>$${subtotal}</td>
+</tr>
+<tr class="totals">
+  <td colspan="4">Tax</td>
+  <td>$${tax_rate * subtotal}</td>
+</tr>
+<tr class="totals">
+  <td colspan="4">Shipping</td>
+  <td>$${shipping_threshold}</td>
+</tr>
+<tr class="totals">
+  <td colspan="4" class="focus">Grand Total</td>
+  <td class="focus">$635.00</td>
+</tr>`
+document.write(bottom);
 }
